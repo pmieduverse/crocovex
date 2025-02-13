@@ -75,6 +75,73 @@
             color: #0ef;
         }
 
+        .logo {
+            font-size: 92px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0ef 20%, #14ffb3 50%, #9333ea 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(14, 255, 241, 0.5);
+            animation: glowPulse 3s infinite alternate;
+            letter-spacing: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #0ef, transparent);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #14ffb3, transparent);
+        }
+
+        .logo-subtitle {
+            font-size: 32px;
+            color: #ffffff;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(14, 255, 241, 0.3);
+            position: relative;
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(14, 255, 241, 0.05);
+            border-radius: 50px;
+            border: 1px solid rgba(14, 255, 241, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @keyframes glowPulse {
+            0% {
+                text-shadow: 0 0 20px rgba(14, 255, 241, 0.5),
+                            0 0 40px rgba(14, 255, 241, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(14, 255, 241, 0.8),
+                            0 0 60px rgba(14, 255, 241, 0.5),
+                            0 0 80px rgba(147, 51, 234, 0.3);
+            }
+        }
+
         section {
             padding: 60px 15px;
             text-align: center;
