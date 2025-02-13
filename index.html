@@ -3,30 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | CrocoVex</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <title>Crocovex - Advanced Crypto Trading Platform</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap');
+
+        :root {
+            --neon-blue: #0ef;
+            --neon-green: #14ffb3;
+            --metallic-dark: #1a1f2c;
+            --metallic-light: #2a3142;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0e17, #1a1f2c, #2a3142);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 31, 44, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-family: 'Rajdhani', sans-serif;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--neon-blue);
+        }
+
+        section {
+            padding: 60px 15px;
+            text-align: center;
+        }
+
+        .hero {
+            background: radial-gradient(circle, rgba(14, 255, 240, 0.15), rgba(0, 0, 0, 0.9)),
+                        url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=2000') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, var(--metallic-dark) 0%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 15px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 40px;
+            text-transform: uppercase;
+            margin: 0;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(14, 255, 240, 0.5);
+            animation: text-glow 2s infinite alternate, fadeIn 2s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin: 15px 0 30px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .trading-view-widget {
+            background: rgba(26, 31, 44, 0.95);
+            border: 1px solid rgba(14, 255, 240, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 30px auto;
+            width: 95%;
+            height: 400px;
+            box-shadow: 0 0 30px rgba(14, 255, 240, 0.2);
+        }
+
+        .about-section {
+            background: linear-gradient(45deg, var(--metallic-dark), var(--metallic-light));
+            padding: 60px 15px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: rgba(26, 31, 44, 0.95);
+            border: 1px solid rgba(14, 255, 240, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(14, 255, 240, 0.2);
+        }
+
+        .about-card h3 {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            color: #000;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(14, 255, 240, 0.5);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .widgets-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .widget {
+            background: rgba(26, 31, 44, 0.95);
+            border: 1px solid rgba(14, 255, 240, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(14, 255, 240, 0.1);
+        }
+
+        .widget h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+        }
+
+        .calculator-card {
+            padding: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 5px;
+            background: rgba(26, 31, 44, 0.95);
+            color: #fff;
+        }
+
+        .quick-convert {
+            margin-top: 20px;
+        }
+
+        .convert-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--metallic-dark), #000);
+            color: #ccc;
+            text-align: center;
+            padding: 30px 15px;
+            border-top: 2px solid var(--neon-blue);
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 72px;
+            }
+            
+            .about-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 1200px;
+            }
+            
+            .widgets-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                max-width: 1400px;
+            }
+            
+            .convert-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header {
+                padding: 20px 40px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            nav ul li {
+                margin: 0 20px;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+            }
+            
+            .trading-view-widget {
+                height: 600px;
+            }
+        }
+
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 20px rgba(14, 255, 240, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(14, 255, 240, 0.8); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="logo">CrocoVex</div>
+        <a href="#" class="logo">Crocovex</a>
         <nav>
             <ul>
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="about.html" class="nav-link">About Crypto</a></li>
-                <li><a href="prices.html" class="nav-link">Live Prices</a></li>
-                <li><a href="blogs.html" class="nav-link">Blogs</a></li>
-                <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
-    <section class="hero">
-        <h1>Welcome to CrocoVex</h1>
-        <p>Your trusted platform for everything crypto.</p>
-        <a href="about.html" class="cta-button">Learn More</a>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Crocovex</h1>
+            <p>Experience Next-Generation Crypto Trading</p>
+            <a href="https://t.me/NotPixelDailySecrets" target="_blank" rel="noopener" class="btn">Start Trading</a>
+        </div>
     </section>
-    <footer>
-        <p>&copy; 2025 CrocoVex. All rights reserved.</p>
+
+    <!-- TradingView Widget -->
+    <div class="trading-view-widget">
+        <div class="tradingview-widget-container">
+            <div id="tradingview_chart"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+                new TradingView.widget({
+                    "width": "100%",
+                    "height": "100%",
+                    "symbol": "BINANCE:BTCUSDT",
+                    "interval": "1",
+                    "timezone": "Etc/UTC",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#1a1f2c",
+                    "enable_publishing": false,
+                    "hide_side_toolbar": false,
+                    "allow_symbol_change": true,
+                    "studies": [
+                        "MASimple@tv-basicstudies",
+                        "RSI@tv-basicstudies",
+                        "MACD@tv-basicstudies"
+                    ],
+                    "container_id": "tradingview_chart",
+                    "show_popup_button": true,
+                    "popup_width": "1000",
+                    "popup_height": "650",
+                    "details": true,
+                    "hotlist": true,
+                    "calendar": true,
+                    "withdateranges": true
+                });
+            </script>
+        </div>
+    </div>
+
+    <section class="about-section" id="about">
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Advanced Trading</h3>
+                <p>Access professional-grade trading tools, real-time market data, and advanced order types to execute your trading strategy with precision.</p>
+            </div>
+            <div class="about-card">
+                <h3>Secure Platform</h3>
+                <p>Your assets are protected by military-grade encryption, multi-signature wallets, and advanced security protocols.</p>
+            </div>
+            <div class="about-card">
+                <h3>24/7 Support</h3>
+                <p>Our dedicated support team is available around the clock to assist you with any questions or concerns.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="widgets-container" id="community">
+        <!-- Crypto Price Ticker -->
+        <div class="widget price-widget">
+            <h2>Live Cryptocurrency Prices</h2>
+            <div class="widget-description">Real-time price updates for major cryptocurrencies</div>
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                    "colorTheme": "dark",
+                    "dateRange": "12M",
+                    "showChart": true,
+                    "locale": "en",
+                    "largeChartUrl": "",
+                    "isTransparent": false,
+                    "showSymbolLogo": true,
+                    "showFloatingTooltip": true,
+                    "width": "100%",
+                    "height": "500",
+                    "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                    "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                    "gridLineColor": "rgba(42, 46, 57, 0)",
+                    "scaleFontColor": "rgba(120, 123, 134, 1)",
+                    "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                    "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                    "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                    "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                    "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
+                    "tabs": [
+                        {
+                            "title": "Cryptocurrencies",
+                            "symbols": [
+                                {"s": "BINANCE:BTCUSDT", "d": "Bitcoin"},
+                                {"s": "BINANCE:ETHUSDT", "d": "Ethereum"},
+                                {"s": "BINANCE:BNBUSDT", "d": "Binance Coin"},
+                                {"s": "BINANCE:SOLUSDT", "d": "Solana"},
+                                {"s": "BINANCE:ADAUSDT", "d": "Cardano"}
+                            ]
+                        }
+                    ]
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- Technical Analysis Widget -->
+        <div class="widget analysis-widget">
+            <h2>Technical Analysis Insights</h2>
+            <div class="widget-description">Live technical indicators and market sentiment</div>
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                {
+                    "interval": "1m",
+                    "width": "100%",
+                    "isTransparent": false,
+                    "height": "450",
+                    "symbol": "BINANCE:BTCUSDT",
+                    "showIntervalTabs": true,
+                    "locale": "en",
+                    "colorTheme": "dark"
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- Currency Converter Section -->
+        <div class="widget converter-widget">
+            <h2>Currency Calculator</h2>
+            <div class="widget-description">Real-time Currency Conversion Calculator</div>
+            
+            <!-- Calculator Card -->
+            <div class="calculator-card">
+                <h3>USD-INR Converter</h3>
+                
+                <div class="converter-form">
+                    <!-- USD Input -->
+                    <div class="input-group">
+                        <label for="usdAmount">USD:</label>
+                        <input type="number" id="usdAmount" placeholder="Enter USD amount" oninput="convertFromUSD(this.value)">
+                    </div>
+
+                    <!-- INR Input -->
+                    <div class="input-group">
+                        <label for="inrAmount">INR:</label>
+                        <input type="number" id="inrAmount" placeholder="Enter INR amount" oninput="convertFromINR(this.value)">
+                    </div>
+
+                    <!-- Exchange Rate Display -->
+                    <div class="exchange-rate">
+                        Current Exchange Rate: <span id="exchangeRate">1 USD = 83.12 INR</span>
+                    </div>
+
+                    <script>
+                        const EXCHANGE_RATE = 83.12;
+
+                        function convertFromUSD(usd) {
+                            if (usd === '') {
+                                document.getElementById('inrAmount').value = '';
+                                return;
+                            }
+                            const inr = (parseFloat(usd) * EXCHANGE_RATE).toFixed(2);
+                            document.getElementById('inrAmount').value = inr;
+                        }
+
+                        function convertFromINR(inr) {
+                            if (inr === '') {
+                                document.getElementById('usdAmount').value = '';
+                                return;
+                            }
+                            const usd = (parseFloat(inr) / EXCHANGE_RATE).toFixed(2);
+                            document.getElementById('usdAmount').value = usd;
+                        }
+                    </script>
+                </div>
+            </div>
+
+            <!-- Quick Convert Table -->
+            <div class="quick-convert">
+                <h3>Quick Convert Table</h3>
+                <div class="convert-grid">
+                    <div>1 USD = 83.12 INR</div>
+                    <div>10 USD = 831.20 INR</div>
+                    <div>100 USD = 8,312.00 INR</div>
+                    <div>1000 USD = 83,120.00 INR</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Crocovex. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
 </body>
 </html>
