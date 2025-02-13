@@ -1,8 +1,5 @@
-// Instead of removing HTML, we'll hide the content
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide all content except body
-    const mainContent = document.body.innerHTML;
-    
+// Function to block the page
+function blockPage() {
     // Create and show the message
     const message = document.createElement('div');
     message.style.cssText = `
@@ -24,29 +21,60 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear and update body
     document.body.innerHTML = '';
     document.body.appendChild(message);
+}
 
-    // Prevent right-click
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-    // Prevent keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey || e.altKey || e.shiftKey) {
-            e.preventDefault();
-        }
-    });
-
-    // Block F12 and Dev Tools
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-            e.preventDefault();
-        }
-    });
-
-    // Redirect if dev tools open
-    let devtools = function() {};
-    devtools.toString = function() {
-        window.location.href = "about:blank";
-        return '';
-    }
-    console.log('%c', devtools);
+// Prevent right-click and show block screen
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    blockPage();
 });
+
+// Block keyboard shortcuts and show block screen
+document.addEventListener('keydown', (e) => {
+    // Block Ctrl+U
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        blockPage();
+    }
+    
+    // Block F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        blockPage();
+    }
+    
+    // Block Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        blockPage();
+    }
+    
+    // Block Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault();
+        blockPage();
+    }
+    
+    // Block Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        blockPage();
+    }
+});
+
+// Detect DevTools opening
+let devtools = function() {};
+devtools.toString = function() {
+    blockPage();
+    return '';
+}
+console.log('%c', devtools);
+
+// Additional protection for DevTools
+setInterval(function() {
+    const widthThreshold = window.outerWidth - window.innerWidth > 160;
+    const heightThreshold = window.outerHeight - window.innerHeight > 160;
+    if (widthThreshold || heightThreshold) {
+        blockPage();
+    }
+}, 1000);
