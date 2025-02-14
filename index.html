@@ -12,6 +12,8 @@
             --neon-green: #14ffb3;
             --metallic-dark: #1a1f2c;
             --metallic-light: #2a3142;
+            --base-font-size: clamp(14px, 2vw, 16px);
+            --heading-font-size: clamp(24px, 4vw, 92px);
         }
 
         body {
@@ -31,13 +33,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: clamp(10px, 3vw, 50px);
             background: rgba(14, 255, 241, 0.05);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(14, 255, 241, 0.1);
             position: fixed;
-            width: 100%;
+            width: 100vw;
             top: 0;
             z-index: 1000;
             box-sizing: border-box;
@@ -45,7 +47,7 @@
 
         header .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
+            font-size: clamp(20px, 3vw, 28px);
             font-weight: 700;
             text-decoration: none;
             background: linear-gradient(135deg, #0ef 20%, #14ffb3 50%, #9333ea 80%);
@@ -76,7 +78,7 @@
         }
 
         .logo {
-            font-size: 92px;
+            font-size: clamp(40px, 8vw, 92px);
             font-weight: 700;
             font-family: 'Orbitron', sans-serif;
             background: linear-gradient(135deg, #0ef 20%, #14ffb3 50%, #9333ea 80%);
@@ -85,10 +87,12 @@
             color: transparent;
             text-shadow: 0 0 20px rgba(14, 255, 241, 0.5);
             animation: glowPulse 3s infinite alternate;
-            letter-spacing: 12px;
-            margin-bottom: 30px;
+            letter-spacing: clamp(4px, 1vw, 12px);
+            margin: 0 auto 30px;
             position: relative;
             text-transform: uppercase;
+            width: 100%;
+            max-width: 800px;
         }
 
         .logo::before {
@@ -97,7 +101,7 @@
             top: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
+            width: min(80%, 300px);
             height: 3px;
             background: linear-gradient(90deg, transparent, #0ef, transparent);
         }
@@ -108,7 +112,7 @@
             bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
+            width: min(80%, 300px);
             height: 3px;
             background: linear-gradient(90deg, transparent, #14ffb3, transparent);
         }
@@ -150,13 +154,15 @@
         .hero {
             background: radial-gradient(circle, rgba(14, 255, 240, 0.15), rgba(0, 0, 0, 0.9)),
                         url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=2000') center/cover no-repeat;
-            height: 100vh;
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             margin-top: 50px;
+            min-height: 100vh;
+            padding: clamp(60px, 10vh, 120px) 0;
         }
 
         .hero::before {
@@ -177,7 +183,7 @@
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 40px;
+            font-size: clamp(32px, 6vw, 72px);
             text-transform: uppercase;
             margin: 0;
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
@@ -185,14 +191,16 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 20px rgba(14, 255, 240, 0.5);
             animation: text-glow 2s infinite alternate, fadeIn 2s ease-in-out;
+            padding: 0 20px;
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 20px);
             margin: 15px 0 30px;
             color: #fff;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             animation: fadeIn 3s ease-in-out;
+            padding: 0 20px;
         }
 
         .trading-view-widget {
@@ -201,8 +209,8 @@
             border-radius: 10px;
             padding: 15px;
             margin: 30px auto;
-            width: 95%;
-            height: 400px;
+            width: 90%;
+            height: clamp(300px, 50vh, 600px);
             box-shadow: 0 0 30px rgba(14, 255, 240, 0.2);
         }
 
@@ -213,9 +221,10 @@
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            max-width: 600px;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(10px, 2vw, 20px);
+            width: 90%;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -241,8 +250,8 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            font-size: 18px;
+            padding: clamp(8px, 2vw, 12px) clamp(20px, 4vw, 30px);
+            font-size: clamp(14px, 2.5vw, 18px);
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             color: #000;
@@ -258,9 +267,10 @@
         }
 
         .widgets-container {
+            width: 90%;
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(15px, 3vw, 30px);
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -325,41 +335,42 @@
 
         @media (min-width: 768px) {
             .hero h1 {
-                font-size: 72px;
+                font-size: clamp(40px, 6vw, 72px);
             }
             
             .about-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 1200px;
+                grid-template-columns: repeat(auto-fit, minmax(min(300px, 30%), 1fr));
+                max-width: 90vw;
             }
             
             .widgets-container {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+                width: 90%;
                 max-width: 1400px;
             }
             
             .convert-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(min(200px, 45%), 1fr));
             }
             
             header {
-                padding: 20px 40px;
+                padding: clamp(10px, 3vw, 40px);
             }
             
             .logo {
-                font-size: 24px;
+                font-size: clamp(20px, 3vw, 24px);
             }
             
             nav ul li {
-                margin: 0 20px;
+                margin: 0 clamp(10px, 2vw, 20px);
             }
             
             nav ul li a {
-                font-size: 18px;
+                font-size: clamp(14px, 2vw, 18px);
             }
             
             .trading-view-widget {
-                height: 600px;
+                height: clamp(400px, 50vh, 600px);
             }
         }
 
